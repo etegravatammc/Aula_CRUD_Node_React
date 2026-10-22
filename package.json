@@ -1,0 +1,25 @@
+{
+  "name": "aula_crud_node_react",
+  "version": "1.0.0",
+  "description": "Construção de CRUD usando Node e React",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/etegravatammc/Aula_CRUD_Node_React.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/etegravatammc/Aula_CRUD_Node_React/issues"
+  },
+  "homepage": "https://github.com/etegravatammc/Aula_CRUD_Node_React#readme",
+  "dependencies": {
+    "sequelize": "^6.37.8",
+    "sqlite3": "^6.0.1"
+  }
+}
