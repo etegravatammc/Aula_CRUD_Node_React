@@ -8,7 +8,7 @@ const {
     atualizarProduto, 
     deletarProduto 
 } = require('./produto');
-const usuario = require('./usuario'); // Caso queira manter os prompts lá
+const usuario = require('./usuario'); 
 
 (async () => {
     try {
