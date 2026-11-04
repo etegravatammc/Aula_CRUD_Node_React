@@ -22,50 +22,73 @@ const Produto = database.define('produto', {
     }
 });
 
-
-function createProduto(nome, preco, descricao) {
-        // Criando um novo  produto
-    (async () => {
-        const novoProduto = await produto.create({
+async function createProduto(nome, preco, descricao) {
+    try {
+        const novoProduto = await Produto.create({
             nome: nome,
             preco: preco,
             descricao: descricao
         });
         console.log('Novo produto criado:', novoProduto.toJSON());
-    })
+    } catch (error) {
+        console.error('Erro ao criar produto:', error);
+    }
 }
-/*
-function createUsuario(nome, email, senha) {
-            const novoUsuario = await usuario.create({
-            nome: nome,
-            email: email,
-            senha: senha
-        });
-        console.log('Novo usuário criado:', novoUsuario.toJSON());
 
-
-        // Consultando todos os produtos e usuários
-function consultarProdutosEUsuarios() {     
-        const produtos = await produto.findAll();
+async function consultarProdutos() {
+    try {
+        const produtos = await Produto.findAll();
         console.log('Produtos encontrados:', produtos.map(produto => produto.toJSON()));
-
-        const usuarios = await usuario.findByPk(1);
-        console.log('Usuários encontrados:', usuarios.toJSON());
+    } catch (error) {
+        console.error('Erro ao consultar produtos:', error);
+    }
 }
 
-        // Atualizando um produto existente
-function atualizarProduto() {
-        const produtoExistente = await produto.findByPk(1);
-        produtoExistente.preco = 228000.00;
-        const produtoAtualizado = await produtoExistente.save();
-        console.log('Produto atualizado:', produtoAtualizado.toJSON());
+async function consultarCodProdutos(id) {
+    try {
+        const produtos = await Produto.findByPk(id);
+        console.log('Produtos encontrados:', produtos.toJSON());
+    } catch (error) {
+        console.error('Erro ao consultar produtos:', error);
+    }
 }
 
-        // Deletando um produto existente
-function deletarProduto() { 
-        const produtoParaDeletar = await produto.findByPk(1);
-        await produtoParaDeletar.destroy();
-        console.log('Produto deletado com sucesso.');
+async function atualizarProduto(id, nome, preco, descricao) {
+    try {
+        const produto = await Produto.findByPk(id);
+        if (produto) {
+            produto.nome = nome;
+            produto.preco = preco;
+            produto.descricao = descricao;
+            await produto.save();
+            console.log('Produto atualizado:', produto.toJSON());
+        } else {
+            console.log('Produto não encontrado.');
+        }
+    } catch (error) {
+        console.error('Erro ao atualizar produto:', error);
+    }
 }
-*/
-module.exports = Produto;
+
+async function deletarProduto(id) {
+    try {
+        const produto = await Produto.findByPk(id);
+        if (produto) {
+            await produto.destroy();
+            console.log('Produto deletado com sucesso.');
+        } else {
+            console.log('Produto não encontrado.');
+        }
+    } catch (error) {
+        console.error('Erro ao deletar produto:', error);
+    }
+}
+
+module.exports = {
+    Produto,
+    createProduto,
+    consultarProdutos,
+    consultarCodProdutos,
+    atualizarProduto,
+    deletarProduto
+};
